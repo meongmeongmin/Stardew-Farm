@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
+    #region Singleton
     public static Inventory instance;
     private void Awake()
     {
@@ -14,12 +15,18 @@ public class Inventory : MonoBehaviour
         }
         instance = this;
     }
+    #endregion
 
-    public delegate void OnSlotCountChange(int val);
-    public OnSlotCountChange onSlotCountChange;
+    public delegate void OnSlotCountChange(int val);    // 대리자 정의
+    public OnSlotCountChange onSlotCountChange;         // 대리자 인스턴스화
+
+    public delegate void OnChangeItem();
+    public OnChangeItem onChangeItem;
+
+    public List<Item> items = new List<Item>();
 
     private int slotCnt;
-    public int SlotCnt
+    public int BasicSlotCnt
     {
         get => slotCnt;
         set
@@ -31,11 +38,34 @@ public class Inventory : MonoBehaviour
 
     void Start()
     {
-        slotCnt = 9; // 기본값 9
+        BasicSlotCnt = 16; // 기본값 9
     }
 
-    void Update()
+    public bool AddItem(Item _item)
     {
-        
+        if (items.Count < BasicSlotCnt)
+        {
+            items.Add(_item);
+            if (onChangeItem != null)
+            onChangeItem.Invoke();
+            return true;
+        }
+        return false;
+    }
+
+    public void RemoveItem(int _index)
+    {
+        items.RemoveAt(_index);
+        onChangeItem.Invoke();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("FieldItem"))
+        {
+            FieldItems fieldItems = collision.GetComponent<FieldItems>();
+            if (AddItem(fieldItems.GetItem()))
+                fieldItems.DestroyItem();
+        }
     }
 }

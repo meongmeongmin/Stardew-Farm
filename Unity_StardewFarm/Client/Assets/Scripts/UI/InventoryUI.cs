@@ -7,8 +7,8 @@ public class InventoryUI : MonoBehaviour
 {
     Inventory inven;
 
-    public GameObject inventoryPanel; //  이 객체를 통해서 유니티엔진이 어떤 게임 오브젝트랑 연결할 지 설정할 수 있도록 함.
-    bool activeInventory = false; // 인벤토리 활성화 변수 false로 시작함. 아직은 열리지 않음.
+    public GameObject inventoryPanel;   // 이 객체를 통해서 유니티엔진이 어떤 게임 오브젝트랑 연결할 지 설정할 수 있도록 함.
+    bool activeInventory = false;       // 인벤토리 활성화할지 확인하는 변수.
 
     public Slot[] slots;
     public Transform slotHolder;
@@ -18,6 +18,8 @@ public class InventoryUI : MonoBehaviour
         inven = Inventory.instance;
         slots = slotHolder.GetComponentsInChildren<Slot>();
         inven.onSlotCountChange += SlotChange;
+        inven.onChangeItem += RedrawSlotUI;
+
         inventoryPanel.SetActive(activeInventory); // 업데이트에서 받아서 시작함
     }
 
@@ -26,7 +28,9 @@ public class InventoryUI : MonoBehaviour
         // 인벤토리 슬롯 크기까지 슬롯을 활성화함
         for(int i = 0; i < slots.Length; i++)
         {
-            if (i < inven.SlotCnt)
+            slots[i].slotNum = i;
+
+            if (i < inven.BasicSlotCnt)
                 slots[i].GetComponent<Button>().interactable = true;
             else
                 slots[i].GetComponent<Button>().interactable = false;
@@ -44,6 +48,19 @@ public class InventoryUI : MonoBehaviour
 
     public void AddSlot()
     {
-        inven.SlotCnt++;
+        inven.BasicSlotCnt = inven.BasicSlotCnt + 4;
+    }
+
+    void RedrawSlotUI()
+    {
+        for (int i =0; i < slots.Length; i++)
+        {
+            slots[i].RemoveSlot();
+        }
+        for (int i = 0; i < inven.items.Count; i++)
+        {
+            slots[i].item = inven.items[i];
+            slots[i].UpdatesSlotUI();
+        }
     }
 }
