@@ -9,10 +9,9 @@ public enum ItemType
     Axe,
     FishingRod,
     WateringCan,
-    ButterflyNet,
     Seed,
     RecoveryPortion,
-    fertilizer,
+    Fertilizer,
     Etc,
 }
 

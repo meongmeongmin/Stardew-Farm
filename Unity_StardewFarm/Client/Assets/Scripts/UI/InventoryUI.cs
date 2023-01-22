@@ -20,7 +20,7 @@ public class InventoryUI : MonoBehaviour
         inven.onSlotCountChange += SlotChange;
         inven.onChangeItem += RedrawSlotUI;
 
-        inventoryPanel.SetActive(activeInventory); // 업데이트에서 받아서 시작함
+        inventoryPanel.SetActive(activeInventory);
     }
 
     private void SlotChange(int val)
@@ -53,7 +53,7 @@ public class InventoryUI : MonoBehaviour
 
     void RedrawSlotUI()
     {
-        for (int i =0; i < slots.Length; i++)
+        for (int i = 0; i < slots.Length; i++)
         {
             slots[i].RemoveSlot();
         }

@@ -38,7 +38,7 @@ public class Inventory : MonoBehaviour
 
     void Start()
     {
-        BasicSlotCnt = 16; // 기본값 9
+        BasicSlotCnt = 16; // 기본값 9, 처음에는 인벤토리 슬롯을 9개로 시작함.
     }
 
     public bool AddItem(Item _item)
