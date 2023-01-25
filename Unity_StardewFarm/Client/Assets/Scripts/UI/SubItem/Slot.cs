@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Slot : MonoBehaviour, IPointerUpHandler
 {
-    public GameObject equipment;
+    public GameObject playerEquipment;
     bool activeEquipment = false;
 
     public int slotNum;
@@ -34,14 +34,14 @@ public class Slot : MonoBehaviour, IPointerUpHandler
             {
                 Inventory.instance.RemoveItem(slotNum);
             }
-            equipment.GetComponent<SpriteRenderer>().sprite = item.itemImage;
-            activeEquipment = true;
-            equipment.SetActive(activeEquipment);
+            playerEquipment.GetComponent<SpriteRenderer>().sprite = item.itemImage;
+            activeEquipment = !activeEquipment;
+            playerEquipment.SetActive(activeEquipment);
         }
         else
         {
             activeEquipment = false;
-            equipment.SetActive(activeEquipment);
+            playerEquipment.SetActive(activeEquipment);
         }
     }
 }

@@ -63,13 +63,13 @@ public class MapManager
 		}
 	}
 
-	public void DestroyMap()
-	{
-		GameObject map = GameObject.Find("Map");
-		if (map != null)
-		{
-			GameObject.Destroy(map);
-			CurrentGrid = null;
-		}
-	}
+    public void DestroyMap()
+    {
+        GameObject map = GameObject.Find("Map");
+        if (map != null)
+        {
+            GameObject.Destroy(map);
+            CurrentGrid = null;
+        }
+    }
 }
