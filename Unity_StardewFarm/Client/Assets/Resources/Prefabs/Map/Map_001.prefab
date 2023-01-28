@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 1640840011827676476}
   - component: {fileID: 6538041634022630538}
   m_Layer: 0
-  m_Name: HomePotal
+  m_Name: HomePortal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -156,6 +156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextPositionType: 1
   DestinationPoint: {fileID: 0}
+  Trans: 0
 --- !u!1 &7354620503560670877
 GameObject:
   m_ObjectHideFlags: 0
