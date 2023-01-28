@@ -13,6 +13,9 @@ public class InventoryUI : MonoBehaviour
     public Slot[] slots;
     public Transform slotHolder;
 
+    public Text _gold;
+    int playerGold = 1000;
+
     private void Start()
     {
         inven = Inventory.instance;
@@ -26,29 +29,36 @@ public class InventoryUI : MonoBehaviour
     private void SlotChange(int val)
     {
         // 인벤토리 슬롯 크기까지 슬롯을 활성화함
-        for(int i = 0; i < slots.Length; i++)
+        for (int i = 0; i < slots.Length; i++)
         {
-            slots[i].slotNum = i;
+             slots[i].slotNum = i;
 
-            if (i < inven.BasicSlotCnt)
-                slots[i].GetComponent<Button>().interactable = true;
-            else
-                slots[i].GetComponent<Button>().interactable = false;
+             if (i < inven.BasicSlotCnt)
+                 slots[i].GetComponent<Button>().interactable = true;
+             else
+                 slots[i].GetComponent<Button>().interactable = false;
         }
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I))                // 키보드 I를 누르면
+        // 키보드 I를 누르면 인벤토리가 열림
+        if (Input.GetKeyDown(KeyCode.I))                
         {
-            activeInventory = !activeInventory;         // activeInventory가 false에서 true
-            inventoryPanel.SetActive(activeInventory); // 해당 게임오브젝트가 열림 이떼 해당한 오브젝트는 인벤토리ㅇㅋ?
+            activeInventory = !activeInventory;         
+            inventoryPanel.SetActive(activeInventory);
         }
     }
 
     public void AddSlot()
     {
-        inven.BasicSlotCnt = inven.BasicSlotCnt + 4;
+        if (playerGold >= 1000)
+        {
+            inven.BasicSlotCnt = inven.BasicSlotCnt + 4;
+            Debug.Log("Gold -1000\nInventory slot +4");
+            playerGold = playerGold - 1000;
+            _gold.text = $"Gold : {playerGold}";
+        }
     }
 
     void RedrawSlotUI()

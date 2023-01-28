@@ -33,7 +33,7 @@ public class MouseSelect : MonoBehaviour
                 tilemap.SetTile(new Vector3Int((int)mousePosition.x, (int)mousePosition.y, 0), changeTile);
             }
 
-            sr.color = Color.green;
+            sr.color = Color.white;
         }
     }
 }
