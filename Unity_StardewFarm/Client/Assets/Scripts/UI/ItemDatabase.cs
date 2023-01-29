@@ -17,10 +17,18 @@ public class ItemDatabase : MonoBehaviour
 
     private void Start()
     {
-        for (int i = 0; i < 9; i++)
+        for (int i = 0; i < 7; i++) // 필드에서 나타날 아이템 개수
         {
             GameObject go = Instantiate(fieldItemPrefab, pos[i], Quaternion.identity);
-            go.GetComponent<FieldItems>().SetItem(itemDB[Random.Range(0, 8)]);
+
+            if (i >= 0 && i <= 3)
+            {
+                go.GetComponent<FieldItems>().SetItem(itemDB[5]);
+            }
+            else
+            {
+                go.GetComponent<FieldItems>().SetItem(itemDB[Random.Range(6, 8)]);
+            }
         }
     }
 }

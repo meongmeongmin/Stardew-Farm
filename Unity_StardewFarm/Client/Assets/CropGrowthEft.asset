@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1f1a41417646604582d87a92e1df250, type: 3}
-  m_Name: MiddleEft
+  m_Script: {fileID: 11500000, guid: 3491516c01db5e24396b8d115cdaa2ea, type: 3}
+  m_Name: CropGrowthEft
   m_EditorClassIdentifier: 
-  healingPoint: 10
+  growthPoint: 10

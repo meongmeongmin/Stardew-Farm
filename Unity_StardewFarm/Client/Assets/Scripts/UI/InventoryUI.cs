@@ -7,8 +7,8 @@ public class InventoryUI : MonoBehaviour
 {
     Inventory inven;
 
-    public GameObject inventoryPanel;   // 이 객체를 통해서 유니티엔진이 어떤 게임 오브젝트랑 연결할 지 설정할 수 있도록 함.
-    bool activeInventory = false;       // 인벤토리 활성화할지 확인하는 변수.
+    public GameObject inventoryPanel;   
+    bool activeInventory = false;       // 인벤토리를 활성화할지 확인함
 
     public Slot[] slots;
     public Transform slotHolder;
@@ -33,7 +33,7 @@ public class InventoryUI : MonoBehaviour
         {
              slots[i].slotNum = i;
 
-             if (i < inven.BasicSlotCnt)
+             if (i < inven.InitialSlotCnt)
                  slots[i].GetComponent<Button>().interactable = true;
              else
                  slots[i].GetComponent<Button>().interactable = false;
@@ -45,16 +45,22 @@ public class InventoryUI : MonoBehaviour
         // 키보드 I를 누르면 인벤토리가 열림
         if (Input.GetKeyDown(KeyCode.I))                
         {
-            activeInventory = !activeInventory;         
+            if (inventoryPanel.activeSelf) // 이미 인벤토리 창이 켜져있는지 확인함
+                activeInventory = false;
+            else
+                activeInventory = true;
+
             inventoryPanel.SetActive(activeInventory);
         }
     }
 
+    // 슬롯 창을 확장해주는 함수
     public void AddSlot()
     {
         if (playerGold >= 1000)
         {
-            inven.BasicSlotCnt = inven.BasicSlotCnt + 4;
+            inven.InitialSlotCnt = inven.InitialSlotCnt + 4;
+
             Debug.Log("Gold -1000\nInventory slot +4");
             playerGold = playerGold - 1000;
             _gold.text = $"Gold : {playerGold}";

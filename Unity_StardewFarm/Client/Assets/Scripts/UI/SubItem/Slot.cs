@@ -34,9 +34,13 @@ public class Slot : MonoBehaviour, IPointerUpHandler
             {
                 Inventory.instance.RemoveItem(slotNum);
             }
-            playerEquipment.GetComponent<SpriteRenderer>().sprite = item.itemImage;
-            activeEquipment = true;
-            playerEquipment.SetActive(activeEquipment);
+
+            if (item != null)
+            {
+                playerEquipment.GetComponent<SpriteRenderer>().sprite = item.itemImage;
+                activeEquipment = true;
+                playerEquipment.SetActive(activeEquipment);
+            } 
         }
         else
         {
